@@ -43,13 +43,13 @@ public class OutputView {
         System.out.println(lineResult.toString());
     }
 
-    private static void addLineResult(StringBuilder result, boolean point) {
-        result.append(PERSON_POINT_SYMBOL);
+    private static void addLineResult(StringBuilder lineResult, boolean point) {
+        lineResult.append(PERSON_POINT_SYMBOL);
         if (point) {
-            result.append(LADDER_LINK_SYMBOL);
+            lineResult.append(LADDER_LINK_SYMBOL);
             return;
         }
-        result.append(LADDER_UNLINK_SYMBOL);
+        lineResult.append(LADDER_UNLINK_SYMBOL);
         return;
     }
 }
