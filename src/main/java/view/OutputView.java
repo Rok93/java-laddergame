@@ -8,7 +8,6 @@ import domain.Names;
 import java.util.List;
 
 public class OutputView {
-
     public static final String RESULT_MESSAGE = "실행결과";
     public static final String PERSON_POINT_SYMBOL = "|";
     public static final String LADDER_LINK_SYMBOL = "-----";
@@ -36,17 +35,17 @@ public class OutputView {
 
     private static void printLine(Line line) {
         List<Boolean> points = line.getPoints();
-        StringBuilder result = new StringBuilder();
-        for (boolean b : points) {
-            addLineResult(result, b);
+        StringBuilder lineResult = new StringBuilder();
+        for (boolean point : points) {
+            addLineResult(lineResult, point);
         }
-        result.append(PERSON_POINT_SYMBOL);
-        System.out.println(result.toString());
+        lineResult.append(PERSON_POINT_SYMBOL);
+        System.out.println(lineResult.toString());
     }
 
-    private static void addLineResult(StringBuilder result, boolean b) {
+    private static void addLineResult(StringBuilder result, boolean point) {
         result.append(PERSON_POINT_SYMBOL);
-        if (b) {
+        if (point) {
             result.append(LADDER_LINK_SYMBOL);
             return;
         }
