@@ -23,20 +23,20 @@ public class Line {
         }
     }
 
-    private void addPoint(int i) {
-        if (isFirstIndex(i) || isBeforeValueThatFalse(i)) {
+    private void addPoint(int currentIndex) {
+        if (isFirstIndex(currentIndex) || isBeforeValueThatFalse(currentIndex)) {
             points.add(random.nextBoolean());
             return;
         }
         points.add(false);
     }
 
-    private boolean isBeforeValueThatFalse(int i) {
-        return !points.get(i - 1);
+    private boolean isBeforeValueThatFalse(int currentIndex) {
+        return !points.get(currentIndex - 1);
     }
 
-    private boolean isFirstIndex(int i) {
-        return i == ZERO;
+    private boolean isFirstIndex(int currentIndex) {
+        return currentIndex == ZERO;
     }
 
     private void validatePersonNumber(int countOfPerson) {
