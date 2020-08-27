@@ -16,7 +16,7 @@ class PointsTest {
     @Test
     void testInitPoints() {
         //given
-        List<Point> pointGroup = Arrays.asList(new Point(true)); //todo: 변수명이 중복되는데 뭐라고 정할까??
+        List<Point> pointGroup = Arrays.asList(new Point(true));
 
         //when
         Points points = new Points(pointGroup);
