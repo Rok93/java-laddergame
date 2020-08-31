@@ -14,15 +14,16 @@ class LineTest {
     @Test
     void testInitLine() {
         //given
-        List<Point> ts = Arrays.asList(true, false).stream()
-                .map(Point::new)
-                .collect(Collectors.toList());
-        Points points = new Points(ts);
+        Points points = new Points(
+                Arrays.asList(true, false)
+                        .stream()
+                        .map(Point::new)
+                        .collect(Collectors.toList()));
 
         //when
         Line line = new Line(points);
 
         //then
-        assertThat(line.getPoints().getValues()).hasSize(ts.size());
+        assertThat(line.getPoints().getValues()).hasSize(2);
     }
 }
