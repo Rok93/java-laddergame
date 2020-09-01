@@ -1,20 +1,22 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Ladder {
-    private final List<Line> lines = new ArrayList<>();
+    private final Names names;
+    private final Lines lines;
 
-    public Ladder(Height height, int countOfPerson) {
-        int heightValue = height.getValue();
-        for (int i = 0; i < heightValue; i++) {
-            lines.add(new Line(countOfPerson));
-        }
+    public Ladder(Names names, Lines lines) {
+        this.names = new Names(names.getValues());
+        this.lines = lines;
     }
 
     public List<Line> getLines() {
-        return Collections.unmodifiableList(lines);
+        return Collections.unmodifiableList(lines.getLines());
+    }
+
+    public Names getNames() {
+        return new Names(names.getValues());
     }
 }
