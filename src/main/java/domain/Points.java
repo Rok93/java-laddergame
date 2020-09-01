@@ -44,4 +44,8 @@ public class Points {
     public int getSize() {
         return points.size();
     }
+
+    public List<Point> getValues() {
+        return new ArrayList<>(points);
+    }
 }
