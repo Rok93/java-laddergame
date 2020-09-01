@@ -6,9 +6,9 @@ import java.util.List;
 public class Lines {
     private final List<Line> lines;
 
-    public Lines(LineGenerator lineGenerator, int height) {
+    public Lines(LineGenerator lineGenerator, Height height) {
         lines = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < height.getValue(); i++) {
             lines.add(lineGenerator.generateLine());
         }
     }

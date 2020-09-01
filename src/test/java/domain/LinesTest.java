@@ -13,12 +13,12 @@ class LinesTest {
     void testInitLineTest() {
         //given
         LineGenerator lineGenerator = () -> new Line(Arrays.asList(true));
-        int height = 2;
+        Height height = new Height(2);
 
         //when
         Lines lines = new Lines(lineGenerator, height);
 
         //then
-        assertThat(lines.getLines()).hasSize(height);
+        assertThat(lines.getLines()).hasSize(height.getValue());
     }
 }

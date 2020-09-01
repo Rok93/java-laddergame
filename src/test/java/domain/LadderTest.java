@@ -13,7 +13,8 @@ class LadderTest {
     @Test
     void testInitLines() {
         //given
-        Lines lines = new Lines(() -> new Line(Arrays.asList(true)), 2);
+        Height height = new Height(2);
+        Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Name chulsoo = new Name("철수");
         Name yeonghee = new Name("영희");
         Names names = new Names(Arrays.asList(chulsoo, yeonghee));
@@ -23,7 +24,7 @@ class LadderTest {
 
         //then
         assertAll(
-                () -> assertThat(ladder.getLines()).hasSize(2),
+                () -> assertThat(ladder.getLines()).hasSize(height.getValue()),
                 () -> assertThat(ladder.getNames().getValues().get(0)).isEqualTo(chulsoo),
                 () -> assertThat(ladder.getNames().getValues().get(1)).isEqualTo(yeonghee)
         );

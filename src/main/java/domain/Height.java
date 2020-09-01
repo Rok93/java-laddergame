@@ -1,8 +1,8 @@
 package domain;
 
 public class Height {
-    public static final int MIN_HEIGHT_LIMIT = 1;
-    public static final String LESS_THAN_MIN_LIMIT_HEIGHT_MESSAGE = "최소 1이상의 높이를 입력하세요! ";
+    private static final int MIN_HEIGHT_LIMIT = 1;
+    private static final String LESS_THAN_MIN_LIMIT_HEIGHT_MESSAGE = "최소 1이상의 높이를 입력하세요! ";
 
     private final int value;
 
