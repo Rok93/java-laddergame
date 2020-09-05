@@ -7,8 +7,8 @@ import java.util.Random;
 public class DefaultLineGenerator implements LineGenerator {
     private final int pointsNumber;
 
-    public DefaultLineGenerator(int personNumber) {
-        this.pointsNumber = personNumber - 1;
+    public DefaultLineGenerator(Names names) {
+        this.pointsNumber = names.calculatePersonNumber() - 1;
     }
 
     @Override
