@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class LadderResultsTest {
     @DisplayName("LadderResults의 객체를 생성한다 ")
     @Test
-    void testInitResults() {
+    void testInitLadderResults() {
         //given
         Name name = new Name("철수");
         Result result = new Result("꽝");
@@ -24,7 +24,7 @@ class LadderResultsTest {
 
         //then
         assertAll(
-                () -> assertThat(ladderResults.getValues().get(0)).isEqualTo(result),
+                () -> assertThat(ladderResults.getValues().get(0).getValue()).isEqualTo("꽝"),
                 () -> assertThat(ladderResults.getKeys().contains(name)).isTrue()
         );
     }
