@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Names {
-    public static final int MIN_NAME_NUMBER = 2;
-    public static final String LESS_THEN_MIN_NUMBER_LIMIT_MESSAGE = "최소 2명이상 참가해야 합니다.";
+    private static final int MIN_NAME_NUMBER = 2;
+    private static final String LESS_THEN_MIN_NUMBER_LIMIT_MESSAGE = "최소 2명이상 참가해야 합니다.";
 
     private final List<Name> names;
 
