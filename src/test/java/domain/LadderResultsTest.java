@@ -9,8 +9,8 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class ResultsTest {
-    @DisplayName("Results 일급 컬렉션의 객체를 생성한다 ")
+class LadderResultsTest {
+    @DisplayName("LadderResults의 객체를 생성한다 ")
     @Test
     void testInitResults() {
         //given
@@ -20,12 +20,12 @@ class ResultsTest {
         resultsValues.put(name, result);
 
         //when
-        Results results = new Results(resultsValues);
+        LadderResults ladderResults = new LadderResults(resultsValues);
 
         //then
         assertAll(
-                () -> assertThat(results.getValues().get(0)).isEqualTo(result),
-                () -> assertThat(results.getKeys().contains(name)).isTrue()
+                () -> assertThat(ladderResults.getValues().get(0)).isEqualTo(result),
+                () -> assertThat(ladderResults.getKeys().contains(name)).isTrue()
         );
     }
 
@@ -38,12 +38,12 @@ class ResultsTest {
         resultsValues.put(new Name("영희"), new Result("당첨"));
 
         //when
-        Results results = new Results(resultsValues);
+        LadderResults ladderResults = new LadderResults(resultsValues);
 
         //then
         assertAll(
-                () -> assertThat(results.getResultBy(new Name("철수"))).isEqualTo("꽝"),
-                () -> assertThat(results.getResultBy(new Name("영희"))).isEqualTo("당첨")
+                () -> assertThat(ladderResults.getResultBy(new Name("철수"))).isEqualTo("꽝"),
+                () -> assertThat(ladderResults.getResultBy(new Name("영희"))).isEqualTo("당첨")
         );
     }
 }

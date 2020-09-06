@@ -2,10 +2,10 @@ package domain;
 
 import java.util.*;
 
-public class Results {
+public class LadderResults {
     private final Map<Name, Result> results;
 
-    public Results(Map<Name, Result> resultsValues) {
+    public LadderResults(Map<Name, Result> resultsValues) {
         this.results = resultsValues;
     }
 
