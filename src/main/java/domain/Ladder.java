@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,15 +28,14 @@ public class Ladder {
     }
 
     public Map<Name, Result> play() {
-        Map<Name, Result> resultsByName = new HashMap<>();
         int personNumber = names.calculatePersonNumber();
-
-        IntStream.range(FIRST_PERSON_POSITION, personNumber)
-                .forEach(startPosition -> resultsByName.put(names.getValues().get(startPosition),
-                        results.getValues().get(lines.traceLines(startPosition)))
-                );
-
-        return resultsByName;
+        return IntStream.range(FIRST_PERSON_POSITION, personNumber)
+                .mapToObj(Integer::new)
+                .collect(Collectors.toMap(
+                        position -> names.getValues().get(position),
+                        position -> lines.traceLines(position))
+                ).entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> results.getValues().get(entry.getValue())));
     }
 
     public List<Line> getLines() {
