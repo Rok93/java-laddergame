@@ -23,4 +23,8 @@ public class Results {
     public List<Result> getValues() {
         return results;
     }
+
+    public int getSize() {
+        return results.size();
+    }
 }
