@@ -25,6 +25,7 @@ class ResultsTest {
 
         //then
         assertAll(
+                () -> assertThat(results.getSize()).isEqualTo(2),
                 () -> assertThat(results.getValues().get(0).getValue()).isEqualTo("꽝"),
                 () -> assertThat(results.getValues().get(1).getValue()).isEqualTo("당첨")
         );
