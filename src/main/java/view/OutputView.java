@@ -1,32 +1,43 @@
 package view;
 
-import domain.Ladder;
-import domain.Line;
-import domain.Name;
-import domain.Names;
+import domain.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OutputView {
-    public static final String RESULT_MESSAGE = "실행결과";
-    public static final String PERSON_POINT_SYMBOL = "|";
-    public static final String LADDER_LINK_SYMBOL = "-----";
-    public static final String LADDER_UNLINK_SYMBOL = "     ";
+    private static final String LADDER_RESULT_MESSAGE = "사다리 결과";
+    private static final String RESULT_MESSAGE = "실행 결과";
+    private static final String PERSON_POINT_SYMBOL = "|";
+    private static final String LADDER_LINK_SYMBOL = "-----";
+    private static final String LADDER_UNLINK_SYMBOL = "     ";
+    private static final String BLANK = "   ";
+    private static final String ALL = "all";
+    private static final String END_LADDER_GAME_MESSAGE = "사다리 게임을 종료합니다.";
 
-    public static void printResult(Ladder ladder, Names names) {
-        System.out.println(RESULT_MESSAGE);
+    public static void printLadder(Ladder ladder, Names names, Results results) {
+        System.out.println(LADDER_RESULT_MESSAGE);
         printNames(names);
-        printLadder(ladder);
+        printLines(ladder);
+        printResults(results);
+    }
+
+    private static void printResults(Results results) {
+        results.getValues().stream()
+                .map(Result::getValue)
+                .forEach(result -> System.out.print(result + BLANK));
+        System.out.println();
     }
 
     public static void printNames(Names names) {
         names.getValues().stream()
                 .map(Name::getValue)
-                .forEach(name -> System.out.print(name + "  "));
+                .forEach(name -> System.out.print(name + BLANK));
         System.out.println();
     }
 
-    public static void printLadder(Ladder ladder) {
+    public static void printLines(Ladder ladder) {
         List<Line> lines = ladder.getLines();
         for (Line line : lines) {
             printLine(line);
@@ -34,7 +45,9 @@ public class OutputView {
     }
 
     private static void printLine(Line line) {
-        List<Boolean> points = line.getPoints();
+        List<Boolean> points = line.getPoints().getValues().stream() // todo: 임시로...
+                .map(Point::isConnected)
+                .collect(Collectors.toList());
         StringBuilder lineResult = new StringBuilder();
         for (boolean point : points) {
             addLineResult(lineResult, point);
@@ -51,5 +64,26 @@ public class OutputView {
         }
         lineResult.append(LADDER_UNLINK_SYMBOL);
         return;
+    }
+
+    public static void printResult(Name name, Map<Name, Result> ladderResults) {
+        System.out.println(RESULT_MESSAGE);
+        if (name.getValue().equals(ALL)) {
+            printAllResults(ladderResults);
+            return;
+        }
+
+        Result result = ladderResults.getOrDefault(name, new Result("사용자를 찾을 수 없음"));
+        System.out.println(result.getValue());
+    }
+
+    private static void printAllResults(Map<Name, Result> ladderResults) {
+        for (Name name : ladderResults.keySet()) {
+            System.out.println(name.getValue() + " : " + ladderResults.get(name).getValue());
+        }
+    }
+
+    public static void printEnd() {
+        System.out.println(END_LADDER_GAME_MESSAGE);
     }
 }
