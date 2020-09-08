@@ -37,7 +37,7 @@ public class Ladder {
         Map<Name, Result> results = new HashMap<>();
         int personNumber = names.calculatePersonNumber();
         for (int startPoint = 0; startPoint < personNumber; startPoint++) {
-            results.put(names.getValues().get(startPoint), traceLadder(startPoint));
+            results.put(names.getValues().get(startPoint), traceLadder(startPoint)); // todo: traceLadder는 Lines의 기능으로 !
         }
 
         return results;
@@ -46,26 +46,9 @@ public class Ladder {
     public Result traceLadder(int currentPoint) {
         List<Line> lines = this.lines.getLines();
         for (Line line : lines) {
-            currentPoint = getNextPoint(line, currentPoint);
+            currentPoint = line.getNextPosition(currentPoint);
         }
 
         return results.getValues().get(currentPoint);
-    }
-
-    private int getNextPoint(Line line, int currentPoint) {
-        List<Point> lineValues = line.getPoints().getValues();
-        if (currentPoint <= 0) {
-            return lineValues.get(currentPoint).isConnected() ? currentPoint + 1 : currentPoint;
-        }
-
-        if (currentPoint >= names.calculatePersonNumber() - 2) {
-            return lineValues.get(currentPoint - 1).isConnected() ? currentPoint - 1 : currentPoint;
-        }
-
-        if (lineValues.get(currentPoint).isConnected()) {
-            return lineValues.get(currentPoint).isConnected() ? currentPoint + 1 : currentPoint;
-        }
-
-        return lineValues.get(currentPoint - 1).isConnected() ? currentPoint - 1 : currentPoint;
     }
 }
