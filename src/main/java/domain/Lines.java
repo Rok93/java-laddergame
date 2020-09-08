@@ -16,4 +16,13 @@ public class Lines {
     public List<Line> getLines() {
         return new ArrayList<>(lines);
     }
+
+    public int traceLines(int point) {
+        System.out.println("traceLines에 들어온 값:" + point);
+        for (Line line : lines) {
+            point = line.getNextPosition(point);
+        }
+
+        return point;
+    }
 }
