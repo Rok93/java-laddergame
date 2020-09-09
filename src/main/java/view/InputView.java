@@ -12,9 +12,11 @@ public class InputView {
     private static final String INPUT_LADDER_HEIGHT_MESSAGE = "최대 사다리 높이는 몇 개인가요?";
     private static final String COMMA = ",";
     private static final String INPUT_RESULTS_MESSAGE = "실행 결과를 입력하세요. (결과는 쉼표(,)로 구하세요 ";
-    private static final String YES = "y";
     private static final String WANT_TO_SEE_MORE_RESULT_MESSAGE = "결과를 더 보시겠습니까? (y/n)";
+    private static final String YES = "y";
     private static final String NO = "n";
+    private static final boolean STOP = true;
+    private static final boolean CONTINUE = false;
 
     private static Scanner input = new Scanner(System.in);
 
@@ -56,11 +58,11 @@ public class InputView {
         String result = input.nextLine();
 
         if (result.equals(YES)) {
-            return false;
+            return CONTINUE;
         }
 
         if (result.equals(NO)) {
-            return true;
+            return STOP;
         }
 
         return inputStartOrExit();

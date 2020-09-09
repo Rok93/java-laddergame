@@ -15,12 +15,14 @@ public class OutputView {
     private static final String BLANK = "   ";
     private static final String ALL = "all";
     private static final String END_LADDER_GAME_MESSAGE = "사다리 게임을 종료합니다.";
+    public static final String COLON = " : ";
 
-    public static void printLadder(Ladder ladder, Names names, Results results) {
+    public static void printLadder(Ladder ladder) {
         System.out.println(LADDER_RESULT_MESSAGE);
-        printNames(names);
-        printLines(ladder);
-        printResults(results);
+        printNames(ladder.getNames());
+        printLines(ladder.getLines());
+        printResults(ladder.getResults());
+        System.out.println();
     }
 
     private static void printResults(Results results) {
@@ -37,8 +39,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLines(Ladder ladder) {
-        List<Line> lines = ladder.getLines();
+    public static void printLines(List<Line> lines) {
         for (Line line : lines) {
             printLine(line);
         }
@@ -49,6 +50,7 @@ public class OutputView {
                 .map(Point::isConnected)
                 .collect(Collectors.toList());
         StringBuilder lineResult = new StringBuilder();
+        lineResult.append(BLANK);
         for (boolean point : points) {
             addLineResult(lineResult, point);
         }
@@ -79,8 +81,9 @@ public class OutputView {
 
     private static void printAllResults(Map<Name, Result> ladderResults) {
         for (Name name : ladderResults.keySet()) {
-            System.out.println(name.getValue() + " : " + ladderResults.get(name).getValue());
+            System.out.println(name.getValue() + COLON + ladderResults.get(name).getValue());
         }
+        System.out.println();
     }
 
     public static void printEnd() {

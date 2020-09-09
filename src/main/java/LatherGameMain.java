@@ -11,18 +11,17 @@ public class LatherGameMain {
         Height height = InputView.inputHeight();
         Lines lines = new Lines(new DefaultLineGenerator(names), height);
         Ladder ladder = new Ladder(names, lines, results);
-        OutputView.printLadder(ladder, names, results);
+        OutputView.printLadder(ladder);
+
         Map<Name, Result> ladderResults = ladder.play();
 
         while (true) {
-            Name name = InputView.inputPersonName();
-            OutputView.printResult(name, ladderResults);
+            OutputView.printResult(InputView.inputPersonName(), ladderResults);
 
             if (InputView.inputStartOrExit()) {
                 break;
             }
         }
-
         OutputView.printEnd();
     }
 }

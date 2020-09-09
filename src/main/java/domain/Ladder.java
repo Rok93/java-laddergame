@@ -45,4 +45,8 @@ public class Ladder {
     public Names getNames() {
         return new Names(names.getValues());
     }
+
+    public Results getResults() {
+        return new Results(results.getValues());
+    }
 }
