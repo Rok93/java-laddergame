@@ -13,7 +13,7 @@ public class LadderGameMain {
         Ladder ladder = new Ladder(names, lines, results);
         OutputView.printLadder(ladder);
 
-        Map<Name, Result> ladderResults = ladder.play();
+        LadderResults ladderResults = ladder.play();
 
         while (true) {
             OutputView.printResult(InputView.inputPersonName(), ladderResults);

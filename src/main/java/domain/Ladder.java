@@ -27,15 +27,16 @@ public class Ladder {
         }
     }
 
-    public Map<Name, Result> play() {
+    public LadderResults play() {
         int personNumber = names.calculatePersonNumber();
-        return IntStream.range(FIRST_PERSON_POSITION, personNumber)
+        Map<Name, Result> results = IntStream.range(FIRST_PERSON_POSITION, personNumber)
                 .mapToObj(Integer::new)
                 .collect(Collectors.toMap(
                         position -> names.getValues().get(position),
                         position -> lines.traceLines(position))
                 ).entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> results.getValues().get(entry.getValue())));
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> this.results.getValues().get(entry.getValue())));
+        return new LadderResults(results);
     }
 
     public List<Line> getLines() {

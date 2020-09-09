@@ -58,12 +58,12 @@ class LadderTest {
         Ladder ladder = new Ladder(names, lines, results);
 
         //when
-        Map<Name, Result> resultsByName = ladder.play();
+        LadderResults resultsByName = ladder.play();
 
         //then
         assertAll(
-                () -> assertThat(resultsByName.get(new Name("철수")).getValue()).isEqualTo("꽝"),
-                () -> assertThat(resultsByName.get(new Name("영희")).getValue()).isEqualTo("당첨")
+                () -> assertThat(resultsByName.findResult(new Name("철수"))).isEqualTo("꽝"),
+                () -> assertThat(resultsByName.findResult(new Name("영희"))).isEqualTo("당첨")
         );
     }
 }
