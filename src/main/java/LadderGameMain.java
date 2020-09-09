@@ -4,7 +4,7 @@ import view.OutputView;
 
 import java.util.Map;
 
-public class LatherGameMain {
+public class LadderGameMain {
     public static void main(String[] args) {
         Names names = InputView.inputPersonNames();
         Results results = InputView.inputResults();
