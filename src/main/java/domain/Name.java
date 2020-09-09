@@ -24,6 +24,10 @@ public class Name {
         return name;
     }
 
+    public boolean isEqualTo(String name) {
+        return this.name.equals(name);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
