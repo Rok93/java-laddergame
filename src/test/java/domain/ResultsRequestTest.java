@@ -11,23 +11,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class ResultsTest {
+class ResultsRequestTest {
     @DisplayName("Results 객체를 생성한다 ")
     @Test
     void testInitResults() {
         //given
-        List<Result> resultValues = Arrays.asList("꽝", "당첨").stream()
-                .map(Result::new)
+        List<ResultRequest> resultRequestValues = Arrays.asList("꽝", "당첨").stream()
+                .map(ResultRequest::new)
                 .collect(Collectors.toList());
 
         //when
-        Results results = new Results(resultValues);
+        ResultsRequest resultsRequest = new ResultsRequest(resultRequestValues);
 
         //then
         assertAll(
-                () -> assertThat(results.getSize()).isEqualTo(2),
-                () -> assertThat(results.getValues().get(0).getValue()).isEqualTo("꽝"),
-                () -> assertThat(results.getValues().get(1).getValue()).isEqualTo("당첨")
+                () -> assertThat(resultsRequest.getSize()).isEqualTo(2),
+                () -> assertThat(resultsRequest.getValues().get(0).getValue()).isEqualTo("꽝"),
+                () -> assertThat(resultsRequest.getValues().get(1).getValue()).isEqualTo("당첨")
         );
     }
 
@@ -35,10 +35,10 @@ class ResultsTest {
     @Test
     void testInitWhenResultLengthLessThanMinResultNumber() {
         //given
-        List<Result> resultValues = Arrays.asList(new Result("꽝"));
+        List<ResultRequest> resultRequestValues = Arrays.asList(new ResultRequest("꽝"));
 
         //when //then
-        assertThatThrownBy(() -> new Results(resultValues))
+        assertThatThrownBy(() -> new ResultsRequest(resultRequestValues))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 }

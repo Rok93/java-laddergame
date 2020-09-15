@@ -22,9 +22,9 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printResults(Results results) {
-        results.getValues().stream()
-                .map(Result::getValue)
+    private static void printResults(ResultsRequest resultsRequest) {
+        resultsRequest.getValues().stream()
+                .map(ResultRequest::getValue)
                 .forEach(result -> System.out.print(result + BLANK));
         System.out.println();
     }
@@ -60,19 +60,19 @@ public class OutputView {
         lineResult.append(point.isConnected() ? LADDER_LINK_SYMBOL : LADDER_UNLINK_SYMBOL);
     }
 
-    public static void printResult(Name name, LadderResults ladderResults) {
+    public static void printResult(Name name, ResultsResponse resultsResponse) {
         System.out.println(RESULT_MESSAGE);
         if (name.isEqualTo(ALL)) {
-            printAllResults(ladderResults);
+            printAllResults(resultsResponse);
             return;
         }
 
-        System.out.println(ladderResults.findResult(name));
+        System.out.println(resultsResponse.findResult(name));
     }
 
-    private static void printAllResults(LadderResults ladderResults) {
-        for (Name name : ladderResults.getKeys()) {
-            System.out.println(name.getValue() + " : " + ladderResults.findResult(name));
+    private static void printAllResults(ResultsResponse resultsResponse) {
+        for (Name name : resultsResponse.getKeys()) {
+            System.out.println(name.getValue() + " : " + resultsResponse.findResult(name));
         }
         System.out.println();
     }

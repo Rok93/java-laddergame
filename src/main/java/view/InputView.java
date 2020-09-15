@@ -41,12 +41,12 @@ public class InputView {
         }
     }
 
-    public static Results inputResults() {
+    public static ResultsRequest inputResults() {
         System.out.println(INPUT_RESULTS_MESSAGE);
         try {
-            return new Results(Arrays.stream(input.nextLine().split(COMMA))
+            return new ResultsRequest(Arrays.stream(input.nextLine().split(COMMA))
                     .map(String::trim)
-                    .map(Result::new)
+                    .map(ResultRequest::new)
                     .collect(Collectors.toList()));
         } catch (IllegalArgumentException e) {
             return inputResults();

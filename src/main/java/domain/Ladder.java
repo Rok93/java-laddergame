@@ -12,31 +12,31 @@ public class Ladder {
 
     private final Names names;
     private final Lines lines;
-    private final Results results;
+    private final ResultsRequest resultsRequest;
 
-    public Ladder(Names names, Lines lines, Results results) {
-        validateLadder(names, results);
+    public Ladder(Names names, Lines lines, ResultsRequest resultsRequest) {
+        validateLadder(names, resultsRequest);
         this.names = names;
         this.lines = lines;
-        this.results = results;
+        this.resultsRequest = resultsRequest;
     }
 
-    private void validateLadder(Names names, Results results) {
-        if (names.calculatePersonNumber() != results.getSize()) {
+    private void validateLadder(Names names, ResultsRequest resultsRequest) {
+        if (names.calculatePersonNumber() != resultsRequest.getSize()) {
             throw new IllegalArgumentException(NAMES_NUMBER_IS_NOT_EQUAL_RESULTS_NUMBER_MESSAGE);
         }
     }
 
-    public LadderResults play() {
+    public ResultsResponse play() {
         int personNumber = names.calculatePersonNumber();
-        Map<Name, Result> results = IntStream.range(FIRST_PERSON_POSITION, personNumber)
+        Map<Name, ResultRequest> results = IntStream.range(FIRST_PERSON_POSITION, personNumber)
                 .mapToObj(Integer::new)
                 .collect(Collectors.toMap(
                         position -> names.getValues().get(position),
                         position -> lines.traceLines(position))
                 ).entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> this.results.getValues().get(entry.getValue())));
-        return new LadderResults(results);
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> this.resultsRequest.getValues().get(entry.getValue())));
+        return new ResultsResponse(results);
     }
 
     public List<Line> getLines() {
@@ -47,7 +47,7 @@ public class Ladder {
         return new Names(names.getValues());
     }
 
-    public Results getResults() {
-        return new Results(results.getValues());
+    public ResultsRequest getResults() {
+        return new ResultsRequest(resultsRequest.getValues());
     }
 }

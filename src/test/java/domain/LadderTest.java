@@ -17,10 +17,10 @@ class LadderTest {
         Height height = new Height(2);
         Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
-        Results results = new Results(Arrays.asList(new Result("꽝"), new Result("당첨")));
+        ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when
-        Ladder ladder = new Ladder(names, lines, results);
+        Ladder ladder = new Ladder(names, lines, resultsRequest);
 
         //then
         assertAll(
@@ -38,10 +38,10 @@ class LadderTest {
         Height height = new Height(2);
         Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희"), new Name("바둑이")));
-        Results results = new Results(Arrays.asList(new Result("꽝"), new Result("당첨")));
+        ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when // then
-        assertThatThrownBy(() -> new Ladder(names, lines, results))
+        assertThatThrownBy(() -> new Ladder(names, lines, resultsRequest))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
@@ -52,12 +52,12 @@ class LadderTest {
         Height height = new Height(2);
         Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
-        Results results = new Results(Arrays.asList(new Result("꽝"), new Result("당첨")));
+        ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
-        Ladder ladder = new Ladder(names, lines, results);
+        Ladder ladder = new Ladder(names, lines, resultsRequest);
 
         //when
-        LadderResults resultsByName = ladder.play();
+        ResultsResponse resultsByName = ladder.play();
 
         //then
         assertAll(

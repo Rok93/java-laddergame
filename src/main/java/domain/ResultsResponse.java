@@ -2,16 +2,16 @@ package domain;
 
 import java.util.*;
 
-public class LadderResults {
+public class ResultsResponse {
     private static final String NOT_FOUND_NAME_MESSAGE = "없는 참가자입니다. ";
 
-    private final Map<Name, Result> results;
+    private final Map<Name, ResultRequest> results;
 
-    public LadderResults(Map<Name, Result> resultsValues) {
+    public ResultsResponse(Map<Name, ResultRequest> resultsValues) {
         this.results = resultsValues;
     }
 
-    public List<Result> getValues() {
+    public List<ResultRequest> getValues() {
         return new ArrayList<>(results.values());
     }
 
@@ -24,6 +24,6 @@ public class LadderResults {
     }
 
     public String findResult(Name name) {
-        return results.getOrDefault(name, new Result(NOT_FOUND_NAME_MESSAGE)).getValue();
+        return results.getOrDefault(name, new ResultRequest(NOT_FOUND_NAME_MESSAGE)).getValue();
     }
 }

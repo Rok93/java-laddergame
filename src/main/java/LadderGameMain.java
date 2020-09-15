@@ -5,16 +5,16 @@ import view.OutputView;
 public class LadderGameMain {
     public static void main(String[] args) {
         Names names = InputView.inputPersonNames();
-        Results results = InputView.inputResults();
+        ResultsRequest resultsRequest = InputView.inputResults();
         Height height = InputView.inputHeight();
         Lines lines = new Lines(new DefaultLineGenerator(names), height);
-        Ladder ladder = new Ladder(names, lines, results);
+        Ladder ladder = new Ladder(names, lines, resultsRequest);
         OutputView.printLadder(ladder);
 
-        LadderResults ladderResults = ladder.play();
+        ResultsResponse resultsResponse = ladder.play();
 
         while (true) {
-            OutputView.printResult(InputView.inputPersonName(), ladderResults);
+            OutputView.printResult(InputView.inputPersonName(), resultsResponse);
 
             if (InputView.inputStartOrExit()) {
                 break;
