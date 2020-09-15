@@ -25,7 +25,7 @@ public class ResultsRequest {
     }
 
     public List<ResultRequest> getValues() {
-        return resultRequests;
+        return new ArrayList<>(resultRequests);
     }
 
     public int getSize() {
