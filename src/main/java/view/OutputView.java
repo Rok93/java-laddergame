@@ -3,7 +3,6 @@ package view;
 import domain.*;
 
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
     private static final String LADDER_RESULT_MESSAGE = "사다리 결과";

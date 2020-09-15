@@ -2,8 +2,6 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.Map;
-
 public class LadderGameMain {
     public static void main(String[] args) {
         Names names = InputView.inputPersonNames();
