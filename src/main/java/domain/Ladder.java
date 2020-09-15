@@ -2,49 +2,36 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Ladder {
-    private static final String NAMES_NUMBER_IS_NOT_EQUAL_RESULTS_NUMBER_MESSAGE = "사람 수와 결과 갯수는 같아야 합니다.";
-    private static final int FIRST_PERSON_POSITION = 0;
+    private static final String RESULTS_NUMBER_IS_NOT_MATCH_LINE_LENGTH_MESSAGE = "결과의 수와 Line의 길이가 매칭되지 않습니다. ";
 
-    private final Names names;
     private final Lines lines;
     private final ResultsRequest resultsRequest;
 
-    public Ladder(Names names, Lines lines, ResultsRequest resultsRequest) {
-        validateLadder(names, resultsRequest);
-        this.names = names;
+    public Ladder(Lines lines, ResultsRequest resultsRequest) {
+        validateLadder(lines, resultsRequest);
         this.lines = lines;
         this.resultsRequest = resultsRequest;
     }
 
-    private void validateLadder(Names names, ResultsRequest resultsRequest) {
-        if (names.calculatePersonNumber() != resultsRequest.getSize()) {
-            throw new IllegalArgumentException(NAMES_NUMBER_IS_NOT_EQUAL_RESULTS_NUMBER_MESSAGE);
+    private void validateLadder(Lines lines, ResultsRequest resultsRequest) {
+        if (lines.getLines().size() != resultsRequest.getSize() - 1) { // todo: lines에 메시지를 전달하여 길이 확인하자! (현재 Liens 길이 2로 고정 됌)
+            throw new IllegalArgumentException(RESULTS_NUMBER_IS_NOT_MATCH_LINE_LENGTH_MESSAGE);
         }
     }
 
     public ResultsResponse play() {
-        int personNumber = names.calculatePersonNumber();
-        Map<Name, ResultRequest> results = IntStream.range(FIRST_PERSON_POSITION, personNumber)
-                .mapToObj(Integer::new)
-                .collect(Collectors.toMap(
-                        position -> names.getValues().get(position),
-                        position -> lines.traceLines(position))
-                ).entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> this.resultsRequest.getValues().get(entry.getValue())));
-        return new ResultsResponse(results);
+        List<ResultRequest> answers = lines.traceResults().stream()
+                .map(position -> resultsRequest.getValue(position))
+                .collect(Collectors.toList());
+
+        return new ResultsResponse(answers);
     }
 
     public List<Line> getLines() {
         return Collections.unmodifiableList(lines.getLines());
-    }
-
-    public Names getNames() {
-        return new Names(names.getValues());
     }
 
     public ResultsRequest getResults() {

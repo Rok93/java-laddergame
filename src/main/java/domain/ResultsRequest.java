@@ -20,6 +20,10 @@ public class ResultsRequest {
         }
     }
 
+    public ResultRequest getValue(int position) {
+        return resultRequests.get(position);
+    }
+
     public List<ResultRequest> getValues() {
         return resultRequests;
     }

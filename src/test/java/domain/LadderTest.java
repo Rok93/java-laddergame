@@ -20,20 +20,15 @@ class LadderTest {
         ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when
-        Ladder ladder = new Ladder(names, lines, resultsRequest);
+        Ladder ladder = new Ladder(lines, resultsRequest);
 
         //then
-        assertAll(
-                () -> assertThat(ladder.getLines()).hasSize(height.getValue()),
-                () -> assertThat(ladder.getNames().getValues().contains(new Name("철수"))).isTrue(),
-                () -> assertThat(ladder.getNames().getValues().contains(new Name("영희"))).isTrue()
-                // Results 관련 테스트 추가해야할까??
-        );
+        assertThat(ladder.getLines()).hasSize(height.getValue());
     }
 
-    @DisplayName("Names 길이와 Results 길이가 다르면 예외를 발생한다 ")
+    @DisplayName("Results 갯수가 Line 길이와 매치되지 않으면 오류를 발생한다 ")
     @Test
-    void testInitWhenNamesNumberIsNotEqualToResultsNumber() {
+    void testInitWhenResultsNumberIsNotMatchToLineLength() {
         //given
         Height height = new Height(2);
         Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
@@ -41,7 +36,7 @@ class LadderTest {
         ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when // then
-        assertThatThrownBy(() -> new Ladder(names, lines, resultsRequest))
+        assertThatThrownBy(() -> new Ladder(lines, resultsRequest))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
@@ -52,17 +47,19 @@ class LadderTest {
         Height height = new Height(2);
         Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
-        ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
+        ResultsRequest resultsRequest = new ResultsRequest(
+                Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨"))
+        );
 
-        Ladder ladder = new Ladder(names, lines, resultsRequest);
+        Ladder ladder = new Ladder(lines, resultsRequest);
 
         //when
-        ResultsResponse resultsByName = ladder.play();
+        ResultsResponse results = ladder.play();
 
         //then
         assertAll(
-                () -> assertThat(resultsByName.findResult(new Name("철수"))).isEqualTo("꽝"),
-                () -> assertThat(resultsByName.findResult(new Name("영희"))).isEqualTo("당첨")
+                () -> assertThat(results.getValues().get(0).getValue()).isEqualTo("꽝"),
+                () -> assertThat(results.getValues().get(1).getValue()).isEqualTo("당첨")
         );
     }
 }

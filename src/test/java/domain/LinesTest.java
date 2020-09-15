@@ -33,15 +33,13 @@ class LinesTest {
         Lines lines = new Lines(() -> new Line(Arrays.asList(true, false)), new Height(2));
 
         //when
-        List<Integer> tracePositions = IntStream.range(0, 3)
-                .mapToObj(position -> lines.traceLines(position))
-                .collect(Collectors.toList());
+        List<Integer> resultsPositions = lines.traceResults();
 
         //then
-        assertAll(
-                () -> assertThat(tracePositions.get(0)).isEqualTo(0),
-                () -> assertThat(tracePositions.get(1)).isEqualTo(1),
-                () -> assertThat(tracePositions.get(2)).isEqualTo(2)
+        assertAll( //todo: 현재 traceResults() 기능에 Names 길이를 임시적으로 상수로 지정해놨기 때문에, 오류가 난다.
+                () -> assertThat(resultsPositions.get(0)).isEqualTo(0),
+                () -> assertThat(resultsPositions.get(1)).isEqualTo(1),
+                () -> assertThat(resultsPositions.get(2)).isEqualTo(2)
         );
     }
 }
