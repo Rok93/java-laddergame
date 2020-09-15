@@ -3,6 +3,7 @@ package view;
 import domain.*;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class OutputView {
     private static final String LADDER_RESULT_MESSAGE = "사다리 결과";
@@ -14,9 +15,9 @@ public class OutputView {
     private static final String ALL = "all";
     private static final String END_LADDER_GAME_MESSAGE = "사다리 게임을 종료합니다.";
 
-    public static void printLadder(Ladder ladder) {
+    public static void printLadder(Names names, Ladder ladder) {
         System.out.println(LADDER_RESULT_MESSAGE);
-        printNames(ladder.getNames());
+        printNames(names);
         printLines(ladder.getLines());
         printResults(ladder.getResults());
         System.out.println();
@@ -60,21 +61,24 @@ public class OutputView {
         lineResult.append(point.isConnected() ? LADDER_LINK_SYMBOL : LADDER_UNLINK_SYMBOL);
     }
 
-    public static void printResult(Name name, ResultsResponse resultsResponse) {
+    public static void printResult(Names names, Name findName, ResultsResponse resultsResponse) {
         System.out.println(RESULT_MESSAGE);
-        if (name.isEqualTo(ALL)) {
-            printAllResults(resultsResponse);
+        if (findName.isEqualTo(ALL)) {
+            printAllResults(names, resultsResponse);
             return;
         }
 
-        System.out.println(resultsResponse.findResult(name));
+        System.out.println(resultsResponse.getValue(names.findPositionNumber(findName)));
     }
 
-    private static void printAllResults(ResultsResponse resultsResponse) {
-        for (Name name : resultsResponse.getKeys()) {
-            System.out.println(name.getValue() + " : " + resultsResponse.findResult(name));
-        }
-        System.out.println();
+    private static void printAllResults(Names names, ResultsResponse resultsResponse) {
+        int size = names.getValues().size();
+        IntStream.range(0, size)
+                .forEach(position -> System.out.println(
+                        names.getValue(position)
+                        + " : "
+                        + resultsResponse.getValue(position))
+                );
     }
 
     public static void printEnd() {

@@ -13,4 +13,8 @@ public class ResultsResponse {
     public List<ResultRequest> getValues() {
         return new ArrayList<>(results);
     }
+
+    public String getValue(int position) {
+        return results.get(position).getValue();
+    }
 }

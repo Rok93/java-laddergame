@@ -8,13 +8,14 @@ public class LadderGameMain {
         ResultsRequest resultsRequest = InputView.inputResults();
         Height height = InputView.inputHeight();
         Lines lines = new Lines(new DefaultLineGenerator(names), height);
-        Ladder ladder = new Ladder(names, lines, resultsRequest);
-        OutputView.printLadder(ladder);
+        Ladder ladder = new Ladder(lines, resultsRequest);
+        OutputView.printLadder(names, ladder);
 
         ResultsResponse resultsResponse = ladder.play();
 
         while (true) {
-            OutputView.printResult(InputView.inputPersonName(), resultsResponse);
+            Name findName = InputView.inputPersonName();
+            OutputView.printResult(names, findName, resultsResponse);
 
             if (InputView.inputStartOrExit()) {
                 break;
