@@ -15,8 +15,8 @@ class LadderTest {
     void testInitLines() {
         //given
         Height height = new Height(2);
-        Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
+        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
         ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when
@@ -31,8 +31,8 @@ class LadderTest {
     void testInitWhenResultsNumberIsNotMatchToLineLength() {
         //given
         Height height = new Height(2);
-        Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희"), new Name("바둑이")));
+        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
         ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when // then
@@ -45,8 +45,8 @@ class LadderTest {
     void testPlayLadderGame() {
         //given
         Height height = new Height(2);
-        Lines lines = new Lines(() -> new Line(Arrays.asList(true)), height);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
+        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
         ResultsRequest resultsRequest = new ResultsRequest(
                 Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨"))
         );

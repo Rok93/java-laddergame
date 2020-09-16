@@ -5,14 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 public class DefaultLineGenerator implements LineGenerator {
-    private final int pointsNumber;
-
-    public DefaultLineGenerator(Names names) {
-        this.pointsNumber = names.calculatePersonNumber() - 1;
-    }
 
     @Override
-    public Line generateLine() {
+    public Line generateLine(int personNumber) {
+        int pointsNumber = personNumber - 1;
         boolean beforeValue = false;
         List<Boolean> points = new ArrayList<>();
         for (int i = 0; i < pointsNumber; i++) {

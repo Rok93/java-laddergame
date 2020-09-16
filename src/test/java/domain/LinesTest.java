@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -16,11 +15,13 @@ class LinesTest {
     @Test
     void testInitLineTest() {
         //given
-        LineGenerator lineGenerator = () -> new Line(Arrays.asList(true));
         Height height = new Height(2);
+        Names names = new Names(Arrays.asList("철수", "영희").stream()
+                .map(Name::new)
+                .collect(Collectors.toList()));
 
         //when
-        Lines lines = new Lines(lineGenerator, height);
+        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
 
         //then
         assertThat(lines.getLines()).hasSize(height.getValue());
@@ -30,13 +31,16 @@ class LinesTest {
     @Test
     void testTraceLines() {
         //given
-        Lines lines = new Lines(() -> new Line(Arrays.asList(true, false)), new Height(2));
+        Names names = new Names(Arrays.asList("철수", "영희", "바둑이").stream()
+                .map(Name::new)
+                .collect(Collectors.toList()));
+        Lines lines = new Lines(number -> new Line(Arrays.asList(true, false)), names, new Height(2));
 
         //when
         List<Integer> resultsPositions = lines.traceResults();
 
         //then
-        assertAll( //todo: 현재 traceResults() 기능에 Names 길이를 임시적으로 상수로 지정해놨기 때문에, 오류가 난다.
+        assertAll(
                 () -> assertThat(resultsPositions.get(0)).isEqualTo(0),
                 () -> assertThat(resultsPositions.get(1)).isEqualTo(1),
                 () -> assertThat(resultsPositions.get(2)).isEqualTo(2)
