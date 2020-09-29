@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class ResultsRequestTest {
     @DisplayName("Results 객체를 생성한다 ")
@@ -24,11 +23,9 @@ class ResultsRequestTest {
         ResultsRequest resultsRequest = new ResultsRequest(resultRequestValues);
 
         //then
-        assertAll(
-                () -> assertThat(resultsRequest.getSize()).isEqualTo(2),
-                () -> assertThat(resultsRequest.getValues().get(0).getValue()).isEqualTo("꽝"),
-                () -> assertThat(resultsRequest.getValues().get(1).getValue()).isEqualTo("당첨")
-        );
+        assertThat(resultsRequest.getValues())
+                .usingRecursiveFieldByFieldElementComparator()
+                .containsExactlyInAnyOrder(new ResultRequest("꽝"), new ResultRequest("당첨"));
     }
 
     @DisplayName("Results 길이가 최소길이보다 작으면 예외를 발생한다 ")

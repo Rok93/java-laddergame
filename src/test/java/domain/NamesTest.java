@@ -14,15 +14,17 @@ class NamesTest {
     @Test
     void testInitNames() {
         //given
-        Name name1 = new Name("참가자1");
-        Name name2 = new Name("참가자2");
-        List<Name> lines = Arrays.asList(name1, name2);
+        String name1 = "참가자1";
+        String name2 = "참가자2";
+        List<Name> lines = Arrays.asList(new Name(name1), new Name(name2));
 
         //when
         Names names = new Names(lines);
 
         //then
-        assertThat(names.getValues()).contains(name1, name2);
+        assertThat(names.getValues())
+                .usingFieldByFieldElementComparator()
+                .containsExactlyInAnyOrder(new Name(name1), new Name(name2));
     }
 
     @DisplayName("사람 수를 계산하는 기능을 테스트한다 ")
@@ -30,12 +32,13 @@ class NamesTest {
     void testCalculatePersonNumberFunction() {
         //given
         List<Name> lines = Arrays.asList(new Name("참가자1"), new Name("참가자2"));
-
-        //when
         Names names = new Names(lines);
 
+        //when
+        int personNumber = names.calculatePersonNumber();
+
         //then
-        assertThat(names.calculatePersonNumber()).isEqualTo(lines.size());
+        assertThat(personNumber).isEqualTo(lines.size());
     }
 
     @DisplayName("참가자 수가 최소 참가인원 수 보다 작으면 예외를 발생시킨다 ")

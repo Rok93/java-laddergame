@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LadderTest {
     @DisplayName("Ladder 객체를 생성한다 ")
@@ -57,9 +56,8 @@ class LadderTest {
         ResultsResponse results = ladder.play();
 
         //then
-        assertAll(
-                () -> assertThat(results.getValues().get(0).getValue()).isEqualTo("꽝"),
-                () -> assertThat(results.getValues().get(1).getValue()).isEqualTo("당첨")
-        );
+        assertThat(results.getValues())
+                .usingFieldByFieldElementComparator()
+                .containsExactlyInAnyOrder(new ResultRequest("꽝"), new ResultRequest("당첨"));
     }
 }
