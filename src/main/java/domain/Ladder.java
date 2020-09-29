@@ -17,7 +17,7 @@ public class Ladder {
     }
 
     private void validateLadder(Lines lines, ResultsRequest resultsRequest) {
-        if (lines.getLines().size() != resultsRequest.getSize() - 1) { // todo: lines에 메시지를 전달하여 길이 확인하자! (현재 Liens 길이 2로 고정 됌)
+        if (lines.getPersonNumber() != resultsRequest.getSize()) {
             throw new IllegalArgumentException(RESULTS_NUMBER_IS_NOT_MATCH_LINE_LENGTH_MESSAGE);
         }
     }
@@ -32,9 +32,5 @@ public class Ladder {
 
     public List<Line> getLines() {
         return Collections.unmodifiableList(lines.getLines());
-    }
-
-    public ResultsRequest getResults() {
-        return new ResultsRequest(resultsRequest.getValues());
     }
 }

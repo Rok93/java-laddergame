@@ -39,4 +39,8 @@ public class Lines {
     public List<Line> getLines() {
         return new ArrayList<>(lines);
     }
+
+    public int getPersonNumber() {
+        return personNumber;
+    }
 }
