@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Points {
-    public static final String POINT_NOT_CONTINUITY_CONNECTED_MESSAGE = "Point는 연속해서 연결될 수 없습니다.";
+    private static final String POINT_NOT_CONTINUITY_CONNECTED_MESSAGE = "Point는 연속해서 연결될 수 없습니다.";
     private static final String LESS_THEN_MIN_PERSON_NUMBER_MESSAGE = "최소 2명의 참가자가 필요합니다.";
     private static final int MIN_POINT_NUMBER = 1;
+    private static final int FIRST_POSITION = 0;
 
     private final List<Point> points;
 
@@ -47,5 +48,26 @@ public class Points {
 
     public List<Point> getValues() {
         return new ArrayList<>(points);
+    }
+
+    public int followPoint(int currentPosition) {
+        if (currentPosition == FIRST_POSITION) {
+            return points.get(currentPosition).isConnected() ? currentPosition + 1 : currentPosition;
+        }
+
+        int lastPosition = points.size();
+        if (currentPosition == lastPosition) {
+            return points.get(currentPosition - 1).isConnected() ? currentPosition - 1 : currentPosition;
+        }
+
+        if (points.get(currentPosition - 1).isConnected()) {
+            return currentPosition - 1;
+        }
+
+        if (points.get(currentPosition).isConnected()) {
+            return currentPosition + 1;
+        }
+
+        return currentPosition;
     }
 }

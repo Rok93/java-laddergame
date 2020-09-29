@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class PointsTest {
 
@@ -45,5 +46,24 @@ class PointsTest {
         //when //then
         assertThatThrownBy(() -> new Points(continuouslyConnectedPoints))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("특정위치에서 연결되어있는 포인트를 따라 이동한 다음 위치를 찾는 기능을 테스트한다")
+    @Test
+    void testFollowPoint() {
+        //given
+        Points points = new Points(Arrays.asList(new Point(false), new Point(true)));
+
+        //when
+        int firstPosition = points.followPoint(0);
+        int secondPosition = points.followPoint(1);
+        int thirdPosition = points.followPoint(2);
+
+        //then
+        assertAll(
+                () -> assertThat(firstPosition).isEqualTo(0),
+                () -> assertThat(secondPosition).isEqualTo(2),
+                () -> assertThat(thirdPosition).isEqualTo(1)
+        );
     }
 }
