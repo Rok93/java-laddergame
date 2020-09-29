@@ -15,11 +15,11 @@ public class OutputView {
     private static final String ALL = "all";
     private static final String END_LADDER_GAME_MESSAGE = "사다리 게임을 종료합니다.";
 
-    public static void printLadder(Names names, Ladder ladder) {
+    public static void printLadder(Names names, Ladder ladder, ResultsRequest resultsRequest) {
         System.out.println(LADDER_RESULT_MESSAGE);
         printNames(names);
         printLines(ladder.getLines());
-        printResults(ladder.getResults());
+        printResults(resultsRequest);
         System.out.println();
     }
 
@@ -76,8 +76,8 @@ public class OutputView {
         IntStream.range(0, size)
                 .forEach(position -> System.out.println(
                         names.getValue(position)
-                        + " : "
-                        + resultsResponse.getValue(position))
+                                + " : "
+                                + resultsResponse.getValue(position))
                 );
     }
 
