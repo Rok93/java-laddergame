@@ -40,9 +40,9 @@ class LineTest {
         Line line = new Line(points);
 
         //when
-        int nextPositionFromFirstPosition = line.getNextPosition(0); // 1
-        int nextPositionFromSecondPosition = line.getNextPosition(1); // 0
-        int nextPositionFromThirdPosition = line.getNextPosition(2); // 0
+        int nextPositionFromFirstPosition = line.getNextPosition(0);
+        int nextPositionFromSecondPosition = line.getNextPosition(1);
+        int nextPositionFromThirdPosition = line.getNextPosition(2);
 
         //then
         assertAll(
