@@ -1,4 +1,6 @@
 import domain.*;
+import dto.ResultsRequest;
+import dto.ResultsResponse;
 import view.InputView;
 import view.OutputView;
 

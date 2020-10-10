@@ -19,9 +19,10 @@ class LinesTest {
         Names names = new Names(Arrays.asList("철수", "영희").stream()
                 .map(Name::new)
                 .collect(Collectors.toList()));
+        List<Point> points = Arrays.asList(new Point(true));
 
         //when
-        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
+        Lines lines = new Lines(number -> new Points(points), names, height);
 
         //then
         assertThat(lines.getLines()).hasSize(height.getValue());
@@ -34,7 +35,8 @@ class LinesTest {
         Names names = new Names(Arrays.asList("철수", "영희", "바둑이").stream()
                 .map(Name::new)
                 .collect(Collectors.toList()));
-        Lines lines = new Lines(number -> new Line(Arrays.asList(true, false)), names, new Height(2));
+        List<Point> points = Arrays.asList(new Point(true), new Point(false));
+        Lines lines = new Lines(number -> new Points(points), names, new Height(2));
 
         //when
         List<Integer> resultsPositions = lines.traceResults();

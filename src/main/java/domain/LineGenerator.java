@@ -2,5 +2,5 @@ package domain;
 
 @FunctionalInterface
 public interface LineGenerator {
-    Line generateLine(int names);
+    Points generateLine(int names);
 }

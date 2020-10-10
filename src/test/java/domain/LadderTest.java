@@ -1,12 +1,15 @@
 package domain;
 
+import dto.ResultRequest;
+import dto.ResultsRequest;
+import dto.ResultsResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LadderTest {
     @DisplayName("Ladder 객체를 생성한다 ")
@@ -15,7 +18,8 @@ class LadderTest {
         //given
         Height height = new Height(2);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
-        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
+        List<Point> points = Arrays.asList(new Point(true));
+        Lines lines = new Lines(number -> new Points(points), names, height);
         ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when
@@ -31,10 +35,13 @@ class LadderTest {
         //given
         Height height = new Height(2);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희"), new Name("바둑이")));
-        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
+        List<Point> points = Arrays.asList(new Point(true));
+        Lines lines = new Lines(number -> new Points(points), names, height);
         ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when // then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Ladder(lines, resultsRequest)); // todo: 이렇게 짜도 될것같음!
+
         assertThatThrownBy(() -> new Ladder(lines, resultsRequest))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
@@ -45,7 +52,8 @@ class LadderTest {
         //given
         Height height = new Height(2);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
-        Lines lines = new Lines(number -> new Line(Arrays.asList(true)), names, height);
+        List<Point> points = Arrays.asList(new Point(true));
+        Lines lines = new Lines(number -> new Points(points), names, height);
         ResultsRequest resultsRequest = new ResultsRequest(
                 Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨"))
         );

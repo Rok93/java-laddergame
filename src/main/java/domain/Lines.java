@@ -17,7 +17,7 @@ public class Lines {
         lines = new ArrayList<>();
         int heightValue = height.getValue();
         for (int i = 0; i < heightValue; i++) {
-            lines.add(lineGenerator.generateLine(personNumber));
+            lines.add(new Line(lineGenerator.generateLine(personNumber)));
         }
     }
 

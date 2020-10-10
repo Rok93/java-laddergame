@@ -18,7 +18,8 @@ class LineTest {
                 Arrays.asList(true, false)
                         .stream()
                         .map(Point::new)
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toList())
+        );
 
         //when
         Line line = new Line(points);
