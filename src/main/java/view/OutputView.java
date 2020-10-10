@@ -1,6 +1,9 @@
 package view;
 
 import domain.*;
+import dto.ResultRequest;
+import dto.ResultsRequest;
+import dto.ResultsResponse;
 
 import java.util.List;
 import java.util.stream.IntStream;

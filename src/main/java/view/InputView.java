@@ -1,6 +1,10 @@
 package view;
 
-import domain.*;
+import domain.Height;
+import domain.Name;
+import domain.Names;
+import dto.ResultRequest;
+import dto.ResultsRequest;
 
 import java.util.Arrays;
 import java.util.Scanner;
