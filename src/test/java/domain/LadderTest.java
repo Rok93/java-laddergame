@@ -40,10 +40,7 @@ class LadderTest {
         ResultsRequest resultsRequest = new ResultsRequest(Arrays.asList(new ResultRequest("꽝"), new ResultRequest("당첨")));
 
         //when // then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Ladder(lines, resultsRequest)); // todo: 이렇게 짜도 될것같음!
-
-        assertThatThrownBy(() -> new Ladder(lines, resultsRequest))
-                .isExactlyInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Ladder(lines, resultsRequest));
     }
 
     @DisplayName("사다리 게임을 실행한 결괏값을 얻는 기능 ")
