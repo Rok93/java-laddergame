@@ -51,7 +51,6 @@ public class Points {
     }
 
     public int followPoint(int currentPosition) {
-        int nextPosition = currentPosition;
         if (currentPosition > FIRST_POSITION && points.get(currentPosition - 1).isConnected()) {
             return currentPosition - 1;
         }
@@ -60,6 +59,6 @@ public class Points {
             return currentPosition + 1;
         }
 
-        return nextPosition;
+        return currentPosition;
     }
 }
