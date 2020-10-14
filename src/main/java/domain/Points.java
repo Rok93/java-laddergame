@@ -51,23 +51,15 @@ public class Points {
     }
 
     public int followPoint(int currentPosition) {
-        if (currentPosition == FIRST_POSITION) {
-            return points.get(currentPosition).isConnected() ? currentPosition + 1 : currentPosition;
-        }
-
-        int lastPosition = points.size();
-        if (currentPosition == lastPosition) {
-            return points.get(currentPosition - 1).isConnected() ? currentPosition - 1 : currentPosition;
-        }
-
-        if (points.get(currentPosition - 1).isConnected()) {
+        int nextPosition = currentPosition;
+        if (currentPosition > FIRST_POSITION && points.get(currentPosition - 1).isConnected()) {
             return currentPosition - 1;
         }
 
-        if (points.get(currentPosition).isConnected()) {
+        if (currentPosition < points.size() && points.get(currentPosition).isConnected()) {
             return currentPosition + 1;
         }
 
-        return currentPosition;
+        return nextPosition;
     }
 }
