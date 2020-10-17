@@ -1,8 +1,6 @@
 package domain;
 
-import dto.ResultRequest;
-import dto.ResultsRequest;
-import dto.ResultsResponse;
+import dto.Result;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,26 +10,24 @@ public class Ladder {
     private static final String RESULTS_NUMBER_IS_NOT_MATCH_LINE_LENGTH_MESSAGE = "결과의 수와 Line의 길이가 매칭되지 않습니다. ";
 
     private final Lines lines;
-    private final ResultsRequest resultsRequest;
+    private final List<Result> resultsRequest;
 
-    public Ladder(Lines lines, ResultsRequest resultsRequest) {
+    public Ladder(Lines lines, List<Result> resultsRequest) {
         validateLadder(lines, resultsRequest);
         this.lines = lines;
         this.resultsRequest = resultsRequest;
     }
 
-    private void validateLadder(Lines lines, ResultsRequest resultsRequest) {
-        if (lines.getPersonNumber() != resultsRequest.getSize()) {
+    private void validateLadder(Lines lines, List<Result> resultsRequest) {
+        if (lines.getPersonNumber() != resultsRequest.size()) {
             throw new IllegalArgumentException(RESULTS_NUMBER_IS_NOT_MATCH_LINE_LENGTH_MESSAGE);
         }
     }
 
-    public ResultsResponse play() {
-        List<ResultRequest> answers = lines.traceResults().stream()
-                .map(position -> resultsRequest.getValue(position))
+    public List<Result> play() {
+        return lines.traceResults().stream()
+                .map(position -> resultsRequest.get(position))
                 .collect(Collectors.toList());
-
-        return new ResultsResponse(answers);
     }
 
     public List<Line> getLines() {

@@ -3,10 +3,10 @@ package view;
 import domain.Height;
 import domain.Name;
 import domain.Names;
-import dto.ResultRequest;
-import dto.ResultsRequest;
+import dto.Result;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -45,13 +45,13 @@ public class InputView {
         }
     }
 
-    public static ResultsRequest inputResults() {
+    public static List<Result> inputResults() {
         System.out.println(INPUT_RESULTS_MESSAGE);
         try {
-            return new ResultsRequest(Arrays.stream(input.nextLine().split(COMMA))
+            return Arrays.stream(input.nextLine().split(COMMA))
                     .map(String::trim)
-                    .map(ResultRequest::new)
-                    .collect(Collectors.toList()));
+                    .map(Result::new)
+                    .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             return inputResults();
         }

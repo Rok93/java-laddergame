@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ResultRequestTest {
+class ResultTest {
     @DisplayName("결과 객체를 생성한다 ")
     @Test
     void testInitResult() {
@@ -14,10 +14,10 @@ class ResultRequestTest {
         String resultValue = "결과1";
 
         //when
-        ResultRequest resultRequest = new ResultRequest(resultValue);
+        Result result = new Result(resultValue);
 
         //then
-        assertThat(resultRequest.getValue()).isEqualTo(resultValue);
+        assertThat(result.getValue()).isEqualTo(resultValue);
     }
 
     @DisplayName("비어있는 결괏 값을 가진 결과 객체를 생성하면 예외를 발생한다 ")
@@ -27,7 +27,7 @@ class ResultRequestTest {
         String emptyResultValue = "";
 
         //when //then
-        assertThatThrownBy(() -> new ResultRequest(emptyResultValue))
+        assertThatThrownBy(() -> new Result(emptyResultValue))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 }

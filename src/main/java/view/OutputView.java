@@ -1,9 +1,7 @@
 package view;
 
 import domain.*;
-import dto.ResultRequest;
-import dto.ResultsRequest;
-import dto.ResultsResponse;
+import dto.Result;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -18,7 +16,7 @@ public class OutputView {
     private static final String ALL = "all";
     private static final String END_LADDER_GAME_MESSAGE = "사다리 게임을 종료합니다.";
 
-    public static void printLadder(Names names, Ladder ladder, ResultsRequest resultsRequest) {
+    public static void printLadder(Names names, Ladder ladder, List<Result> resultsRequest) {
         System.out.println(LADDER_RESULT_MESSAGE);
         printNames(names);
         printLines(ladder.getLines());
@@ -26,9 +24,9 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printResults(ResultsRequest resultsRequest) {
-        resultsRequest.getValues().stream()
-                .map(ResultRequest::getValue)
+    private static void printResults(List<Result> resultsRequest) {
+        resultsRequest.stream()
+                .map(Result::getValue)
                 .forEach(result -> System.out.print(result + BLANK));
         System.out.println();
     }
@@ -64,23 +62,23 @@ public class OutputView {
         lineResult.append(point.isConnected() ? LADDER_LINK_SYMBOL : LADDER_UNLINK_SYMBOL);
     }
 
-    public static void printResult(Names names, Name findName, ResultsResponse resultsResponse) {
+    public static void printResult(Names names, Name findName, List<Result> resultsResponse) {
         System.out.println(RESULT_MESSAGE);
         if (findName.isEqualTo(ALL)) {
             printAllResults(names, resultsResponse);
             return;
         }
 
-        System.out.println(resultsResponse.getValue(names.findPositionNumber(findName)));
+        System.out.println(resultsResponse.get(names.findPositionNumber(findName)).getValue());
     }
 
-    private static void printAllResults(Names names, ResultsResponse resultsResponse) {
+    private static void printAllResults(Names names, List<Result> resultsResponse) {
         int size = names.getValues().size();
         IntStream.range(0, size)
                 .forEach(position -> System.out.println(
                         names.getValue(position)
                                 + " : "
-                                + resultsResponse.getValue(position))
+                                + resultsResponse.get(position).getValue())
                 );
     }
 
