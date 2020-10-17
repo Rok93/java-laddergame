@@ -10,8 +10,8 @@ public class LadderGameMain {
         Names names = InputView.inputPersonNames();
         List<Result> resultsRequest = InputView.inputResults();
         Height height = InputView.inputHeight();
-        Lines lines = new Lines(new DefaultLineGenerator(), names, height);
-        Ladder ladder = new Ladder(lines, resultsRequest);
+        LadderLines ladderLines = new LadderLines(new DefaultLadderLineGenerator(), names, height);
+        Ladder ladder = new Ladder(ladderLines, resultsRequest);
         OutputView.printLadder(names, ladder, resultsRequest);
 
         List<Result> resultsResponse = ladder.play();

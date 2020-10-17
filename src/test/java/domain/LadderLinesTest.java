@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class LinesTest {
+class LadderLinesTest {
     @DisplayName("Lines 객체를 생성한다 ")
     @Test
     void testInitLineTest() {
@@ -22,10 +22,10 @@ class LinesTest {
         List<Point> points = Arrays.asList(new Point(true));
 
         //when
-        Lines lines = new Lines(number -> new Points(points), names, height);
+        LadderLines ladderLines = new LadderLines(number -> new Points(points), names, height);
 
         //then
-        assertThat(lines.getLines()).hasSize(height.getValue());
+        assertThat(ladderLines.getLines()).hasSize(height.getValue());
     }
 
     @DisplayName("특정 위치가 Lines를 타고 내려왔을 때의 위치를 찾는 기능을 테스트한다 ")
@@ -36,10 +36,10 @@ class LinesTest {
                 .map(Name::new)
                 .collect(Collectors.toList()));
         List<Point> points = Arrays.asList(new Point(true), new Point(false));
-        Lines lines = new Lines(number -> new Points(points), names, new Height(2));
+        LadderLines ladderLines = new LadderLines(number -> new Points(points), names, new Height(2));
 
         //when
-        List<Integer> resultsPositions = lines.traceResults();
+        List<Integer> resultsPositions = ladderLines.traceResults();
 
         //then
         assertAll(

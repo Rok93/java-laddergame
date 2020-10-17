@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class DefaultLineGenerator implements LineGenerator {
+public class DefaultLadderLineGenerator implements LadderLineGenerator {
 
     @Override
     public Points generateLine(int personNumber) {

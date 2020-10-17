@@ -5,19 +5,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Lines {
+public class LadderLines {
     private static final int FIRST_INDEX = 0;
 
-    private final List<Line> lines;
+    private final List<LadderLine> lines;
     private final int personNumber;
 
-    public Lines(LineGenerator lineGenerator, Names names, Height height) {
+    public LadderLines(LadderLineGenerator ladderLineGenerator, Names names, Height height) {
         this.personNumber = names.calculatePersonNumber();
 
         lines = new ArrayList<>();
         int heightValue = height.getValue();
         for (int i = 0; i < heightValue; i++) {
-            lines.add(new Line(lineGenerator.generateLine(personNumber)));
+            lines.add(new LadderLine(ladderLineGenerator.generateLine(personNumber)));
         }
     }
 
@@ -29,14 +29,14 @@ public class Lines {
     }
 
     private int traceLines(int position) {
-        for (Line line : lines) {
-            position = line.getNextPosition(position);
+        for (LadderLine ladderLine : lines) {
+            position = ladderLine.movePoint(position);
         }
 
         return position;
     }
 
-    public List<Line> getLines() {
+    public List<LadderLine> getLines() {
         return new ArrayList<>(lines);
     }
 

@@ -38,15 +38,14 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLines(List<Line> lines) {
-        for (Line line : lines) {
-            printLine(line);
+    public static void printLines(List<LadderLine> lines) {
+        for (LadderLine ladderLine : lines) {
+            printLine(ladderLine);
         }
     }
 
-    private static void printLine(Line line) {
-        List<Point> points = line.getPoints()
-                .getValues();
+    private static void printLine(LadderLine line) {
+        List<Point> points = line.getValues();
 
         StringBuilder lineResult = new StringBuilder();
         lineResult.append(BLANK);

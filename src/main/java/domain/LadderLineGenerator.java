@@ -1,6 +1,6 @@
 package domain;
 
 @FunctionalInterface
-public interface LineGenerator {
+public interface LadderLineGenerator {
     Points generateLine(int names);
 }

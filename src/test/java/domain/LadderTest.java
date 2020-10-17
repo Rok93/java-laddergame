@@ -18,11 +18,11 @@ class LadderTest {
         Height height = new Height(2);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
         List<Point> points = Arrays.asList(new Point(true));
-        Lines lines = new Lines(number -> new Points(points), names, height);
+        LadderLines ladderLines = new LadderLines(number -> new Points(points), names, height);
         List<Result> resultsRequest = Arrays.asList(new Result("꽝"), new Result("당첨"));
 
         //when
-        Ladder ladder = new Ladder(lines, resultsRequest);
+        Ladder ladder = new Ladder(ladderLines, resultsRequest);
 
         //then
         assertThat(ladder.getLines()).hasSize(height.getValue());
@@ -35,11 +35,11 @@ class LadderTest {
         Height height = new Height(2);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희"), new Name("바둑이")));
         List<Point> points = Arrays.asList(new Point(true));
-        Lines lines = new Lines(number -> new Points(points), names, height);
+        LadderLines ladderLines = new LadderLines(number -> new Points(points), names, height);
         List<Result> resultsRequest = Arrays.asList(new Result("꽝"), new Result("당첨"));
 
         //when // then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Ladder(lines, resultsRequest));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Ladder(ladderLines, resultsRequest));
     }
 
     @DisplayName("사다리 게임을 실행한 결괏값을 얻는 기능 ")
@@ -49,10 +49,10 @@ class LadderTest {
         Height height = new Height(2);
         Names names = new Names(Arrays.asList(new Name("철수"), new Name("영희")));
         List<Point> points = Arrays.asList(new Point(true));
-        Lines lines = new Lines(number -> new Points(points), names, height);
+        LadderLines ladderLines = new LadderLines(number -> new Points(points), names, height);
         List<Result> resultsRequest = Arrays.asList(new Result("꽝"), new Result("당첨"));
 
-        Ladder ladder = new Ladder(lines, resultsRequest);
+        Ladder ladder = new Ladder(ladderLines, resultsRequest);
 
         //when
         List<Result> results = ladder.play();
